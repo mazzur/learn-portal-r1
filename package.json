@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ci:test": "npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI",
+    "ci:e2e": "npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js",
+    "ci": "npm run ci:test & npm run ci:e2e & npm run lint"
   },
   "private": true,
   "dependencies": {
