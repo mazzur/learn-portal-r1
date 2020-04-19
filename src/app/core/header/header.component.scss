@@ -1,0 +1,10 @@
+@import "src/globals";
+
+:host {
+  display: block;
+  background-color: $primary;
+}
+
+.planet-icon {
+  width: 36px;
+}

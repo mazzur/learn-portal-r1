@@ -19,7 +19,12 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "paths": {
+      "App/*": ["src/app/*"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "123456",
+    "title": "Cooking in outer space",
+    "creationDate": "Sat, 18 Apr 2020 14:39:21 GMT",
+    "duration": 120,
+    "description": "Finally! A course that will help you to make some pasta while you are traveling in outer space."
+  },
+  {
+    "id": "123457",
+    "title": "Doing dishes in outer space",
+    "creationDate": "Sat, 18 Apr 2020 14:39:21 GMT",
+    "duration": 120,
+    "description": "It might be quite troublesome to clean your plate when there's basically nothing to breath. This course will help you to become a confident cleaner and prepare you for the next space odyssey."
+  }
+]
