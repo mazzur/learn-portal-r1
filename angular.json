@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "learn-portal-r1"
+    }
+  },
+  "defaultProject": "learn-portal-r1",
+  "cli": {
+    "analytics": false
+  }
 }
