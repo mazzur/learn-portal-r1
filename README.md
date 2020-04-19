@@ -1,4 +1,5 @@
 # LearnPortalR1
+[![mazzur](https://circleci.com/gh/mazzur/learn-portal-r1.svg?style=svg)](<LINK>)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
