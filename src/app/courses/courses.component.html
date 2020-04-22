@@ -1,4 +1,13 @@
-<div class="container">
-  <h2 class="e2e-courses-title">Available courses</h2>
-  <lp-courses-list-item *ngFor="let course of courses | async" [course]="course"></lp-courses-list-item>
+<div class="container pt-3">
+  <div class="py-3 d-flex justify-content-between">
+    <div class="col-6 px-0">
+      <lp-courses-search-control></lp-courses-search-control>
+    </div>
+    <button class="btn btn-primary">Add new course</button>
+  </div>
+  <lp-courses-list-item
+    *ngFor="let course of courses | async"
+    [course]="course">
+  </lp-courses-list-item>
+  <button class="btn btn-secondary btn-lg btn-block">Load more</button>
 </div>
