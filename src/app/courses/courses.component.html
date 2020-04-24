@@ -1,13 +1,15 @@
 <div class="container pt-3">
   <div class="py-3 d-flex justify-content-between">
     <div class="col-6 px-0">
-      <lp-courses-search-control></lp-courses-search-control>
+      <lp-courses-search-control (search)="searchQuery$.next($event)"></lp-courses-search-control>
     </div>
-    <button class="btn btn-primary">Add new course</button>
+    <button class="btn btn-primary" (click)="addRandomCourse()">Add random course</button>
   </div>
   <lp-courses-list-item
-    *ngFor="let course of courses | async"
-    [course]="course">
+    *ngFor="let course of courses$ | async"
+    [course]="course"
+    (delete)="deleteCourse($event)"
+  >
   </lp-courses-list-item>
   <button class="btn btn-secondary btn-lg btn-block">Load more</button>
 </div>

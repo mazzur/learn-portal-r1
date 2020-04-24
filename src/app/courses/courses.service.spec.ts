@@ -12,7 +12,7 @@ describe('CoursesService', () => {
   });
 
   it('should provide courses list', (done) => {
-    service.getCoursesList().subscribe(list => {
+    service.getCourses().subscribe(list => {
       expect(list).toEqual(coursesListMock);
       done();
     });

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from 'App/courses/course';
 
 @Component({
@@ -8,4 +8,5 @@ import { Course } from 'App/courses/course';
 })
 export class CoursesListItemComponent {
   @Input() course: Course;
+  @Output() delete = new EventEmitter<string>();
 }

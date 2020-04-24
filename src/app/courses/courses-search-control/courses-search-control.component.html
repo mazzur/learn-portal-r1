@@ -1,2 +1,8 @@
-<input type="text" class="form-control form-control-lg pr-3" placeholder="Search courses">
+<input
+  type="text"
+  class="form-control form-control-lg pr-3"
+  placeholder="Search courses"
+  #searchControl
+  (input)="searchValue.next(searchControl.value)"
+>
 <i class="fas fa-search search-icon"></i>
