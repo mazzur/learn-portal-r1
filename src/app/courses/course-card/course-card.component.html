@@ -1,0 +1,30 @@
+<div lpCourseCardHighlight [creationDate]="course.creationDate"
+     [ngClass]="['card p-3 mb-3 rounded', bgClass]">
+  <div class="card-body row">
+    <div class="col-11">
+      <h4 class="card-title">
+        <a routerLink="/courses/{{course.id}}">{{ course.title | uppercase }}</a>
+        <i *ngIf="course.topRated" class="fa fa-star pl-2 star-icon"></i>
+      </h4>
+      <h6 class="card-subtitle text-muted">
+        <span class="mr-3">
+          <i class="far fa-clock pr-1"></i>
+          <span>{{course.duration | duration}}</span>
+        </span>
+        <span>
+          <i class="far fa-calendar-alt pr-1"></i>
+          <span>
+            {{course.creationDate | date:'dd MMM yyyy'}}
+          </span>
+        </span>
+      </h6>
+      <div>{{ course.description }}</div>
+    </div>
+    <div class="col-1">
+      <div>
+        <button class="btn btn-sm btn-link">Edit</button>
+        <button class="btn btn-sm btn-link" (click)="delete.emit(course.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
