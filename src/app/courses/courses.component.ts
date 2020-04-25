@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoursesService } from 'App/courses/courses.service';
 import { Course } from 'App/courses/course';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'lp-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss']
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
   searchValue = '';
   courses: Array<Course> = [];
+  private coursesSubscription: Subscription;
 
   constructor(private coursesService: CoursesService) {
   }
@@ -21,11 +23,15 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.coursesService.selectCourses()
+    this.coursesSubscription = this.coursesService.selectCourses()
       .subscribe((courses) => {
         this.courses = courses;
       });
     this.coursesService.queryCourses(this.searchValue);
+  }
+
+  ngOnDestroy(): void {
+    this.coursesSubscription.unsubscribe();
   }
 
   searchCourses(searchValue: string) {
