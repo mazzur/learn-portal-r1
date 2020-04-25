@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   getTitleText(): Promise<string> {
-    return element(by.css('.e2e-courses-title')).getText() as Promise<string>;
+    return element(by.css('.e2e-app-title')).getText() as Promise<string>;
   }
 }
