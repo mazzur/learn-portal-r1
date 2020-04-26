@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCardComponent } from './course-card.component';
-import coursesListMock from 'App/courses/mocks/courses-list.mock.json';
+import coursesListMock from 'App/core/http-interceptors/mocks/courses-list.mock.json';
 import { DurationPipe } from 'App/shared/duration.pipe';
 
 describe('CoursesListItemComponent', () => {

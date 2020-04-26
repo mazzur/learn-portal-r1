@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Course } from 'App/courses/course';
-import { MOCK_COURSES } from 'App/courses/mock-courses-injection-token';
+import { MOCK_COURSES } from 'App/core/http-interceptors/mock-courses-injection-token';
 
 @Injectable()
 export class CoursesInterceptor implements HttpInterceptor {

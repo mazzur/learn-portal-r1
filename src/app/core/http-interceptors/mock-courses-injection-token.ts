@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { Course } from 'App/courses/course';
-import coursesListMock from 'App/courses/mocks/courses-list.mock.json';
+import coursesListMock from 'App/core/http-interceptors/mocks/courses-list.mock.json';
 
 export const MOCK_COURSES = new InjectionToken<Array<Course>>('mock courses list', {
   providedIn: 'root',
