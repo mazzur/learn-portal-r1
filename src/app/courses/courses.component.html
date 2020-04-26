@@ -5,6 +5,10 @@
     </div>
     <button class="btn btn-primary" (click)="addRandomCourse()">Add random course</button>
   </div>
+  <div class="d-flex justify-content-end py-3">
+    <lp-page-size-switcher [pageSize]="pagination.pageSize" (pageSizeChange)="changePageSize($event)">
+    </lp-page-size-switcher>
+  </div>
   <lp-course-card
     *ngFor="let course of courses"
     [course]="course"
@@ -13,5 +17,15 @@
   </lp-course-card>
   <div *ngIf="!courses.length" class="text-center">
     {{ noCoursesMessage }}
+  </div>
+  <div
+    class="d-flex justify-content-center my-3"
+    *ngIf="pagination.numberOfPages > 1"
+  >
+    <lp-page-switcher
+      [page]="pagination.page"
+      [numberOfPages]="pagination.numberOfPages"
+      (pageChange)="changePage($event)"
+    ></lp-page-switcher>
   </div>
 </div>

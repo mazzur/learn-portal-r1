@@ -1,0 +1,8 @@
+<div class="btn-group" role="group">
+  <button
+    type="button"
+    [ngClass]="{'btn': true, 'btn-outline-secondary': pageSize !== size.value, 'btn-secondary': pageSize === size.value}"
+    *ngFor="let size of pageSizes"
+    (click)="pageSizeChange.emit(size.value)"
+  >{{size.viewValue}}</button>
+</div>

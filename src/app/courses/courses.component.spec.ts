@@ -1,6 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesComponent } from './courses.component';
+import { CoursesService } from 'App/courses/courses.service';
+import { of } from 'rxjs';
+
+class MockCoursesService {
+  selectPagedCourses() {
+    return of({ courses: [], pagination: {} });
+  }
+  fetchCourses() {}
+}
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -8,9 +17,13 @@ describe('CoursesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesComponent ]
+      declarations: [CoursesComponent],
+      providers: [{
+        provide: CoursesService,
+        useClass: MockCoursesService
+      }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

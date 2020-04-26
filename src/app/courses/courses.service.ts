@@ -1,53 +1,49 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Course } from './course';
 import { Subject } from 'rxjs';
-import { MOCK_COURSES } from 'App/courses/mock-courses-injection-token';
+import { PageSize } from 'App/shared/page-size-switcher/page-size-switcher.component';
+import { HttpClient } from '@angular/common/http';
+
+export interface Pagination {
+  numberOfPages: number;
+  totalNumberOfResults: number;
+  page: number;
+  pageSize: PageSize;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private courses$ = new Subject<Array<Course>>();
-  private query = '';
+  private pagedCourses$ = new Subject<{ courses: Array<Course>, pagination: Pagination }>();
 
-  constructor(@Inject(MOCK_COURSES) private courses: Array<Course>) {
+  constructor(private httpClient: HttpClient) {
   }
 
-  private filterCourses(normalizedQuery: string) {
-    return this.courses.filter(({ title, description }) => title.toLowerCase().includes(normalizedQuery)
-      || description.toLowerCase().includes(normalizedQuery));
+  selectPagedCourses() {
+    return this.pagedCourses$;
   }
 
-  selectCourses() {
-    return this.courses$;
-  }
-
-  queryCourses(query: string = '') {
-    this.query = query.trim().toLowerCase();
-
-    this.courses$.next(
-      this.query
-        ? this.filterCourses(this.query)
-        : this.courses
-    );
+  fetchCourses(query: string, pagination: Pagination) {
+    this.httpClient.get('courses', {
+      params: {
+        query,
+        page: JSON.stringify(pagination.page),
+        pageSize: JSON.stringify(pagination.pageSize)
+      }
+    }).subscribe((response: { results: Array<Course>, pagination: Pagination }) => {
+      this.pagedCourses$.next({
+        courses: response.results,
+        pagination: response.pagination
+      });
+    });
   }
 
   deleteCourse(courseId: string) {
-    this.courses.splice(this.courses.findIndex(({ id }) => id === courseId), 1);
-    this.queryCourses(this.query);
+    return this.httpClient.delete(`courses/${ courseId }`);
   }
 
   addRandomCourse() {
-    const dummyRandomId = Math.floor(Math.random() * 100000);
-
-    this.courses.push({
-      id: `${ dummyRandomId }`,
-      title: `Random course ${ dummyRandomId }`,
-      description: 'Quite a random course description',
-      creationDate: 'Sat, 1 May 2020 14:39:21 GMT',
-      duration: 120,
-      topRated: false,
-    });
-    this.queryCourses(this.query);
+    return this.httpClient.post('courses', {});
   }
 }

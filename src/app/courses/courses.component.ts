@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CoursesService } from 'App/courses/courses.service';
+import { CoursesService, Pagination } from 'App/courses/courses.service';
 import { Course } from 'App/courses/course';
 import { Subscription } from 'rxjs';
+import { PageSize } from 'App/shared/page-size-switcher/page-size-switcher.component';
 
 @Component({
   selector: 'lp-courses',
@@ -9,9 +10,15 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit, OnDestroy {
-  searchValue = '';
   courses: Array<Course> = [];
-  private coursesSubscription: Subscription;
+  searchValue = '';
+  pagination: Pagination = {
+    numberOfPages: 0,
+    totalNumberOfResults: 0,
+    page: 0,
+    pageSize: 3
+  };
+  private pagedCoursesSubscription: Subscription;
 
   constructor(private coursesService: CoursesService) {
   }
@@ -23,27 +30,53 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.coursesSubscription = this.coursesService.selectCourses()
-      .subscribe((courses) => {
+    this.pagedCoursesSubscription = this.coursesService.selectPagedCourses()
+      .subscribe(({ courses, pagination }) => {
         this.courses = courses;
+        this.pagination = pagination;
+
+        if (pagination.page >= pagination.numberOfPages) {
+          this.pagination.page = this.pagination.page - 1;
+          this.fetchCourses();
+        }
       });
-    this.coursesService.queryCourses(this.searchValue);
+    this.fetchCourses();
   }
 
   ngOnDestroy(): void {
-    this.coursesSubscription.unsubscribe();
+    this.pagedCoursesSubscription.unsubscribe();
+  }
+
+  private fetchCourses() {
+    this.coursesService.fetchCourses(this.searchValue, this.pagination);
   }
 
   searchCourses(searchValue: string) {
     this.searchValue = searchValue;
-    this.coursesService.queryCourses(this.searchValue);
+    this.fetchCourses();
   }
 
   deleteCourse(id: string) {
-    this.coursesService.deleteCourse(id);
+    this.coursesService.deleteCourse(id)
+      .subscribe(() => this.fetchCourses());
   }
 
   addRandomCourse() {
-    this.coursesService.addRandomCourse();
+    this.coursesService.addRandomCourse()
+      .subscribe(() => this.fetchCourses());
+  }
+
+  changePageSize(pageSize: PageSize) {
+    this.pagination = {
+      ...this.pagination,
+      pageSize,
+      page: 0
+    };
+    this.fetchCourses();
+  }
+
+  changePage(page: number) {
+    this.pagination.page = page;
+    this.fetchCourses();
   }
 }
