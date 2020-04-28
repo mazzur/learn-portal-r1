@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoursesService, Pagination } from 'App/courses/courses.service';
 import { Course } from 'App/courses/course';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { PageSize } from 'App/shared/page-size-switcher/page-size-switcher.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'lp-courses',
@@ -18,7 +19,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     page: 0,
     pageSize: 3
   };
-  private pagedCoursesSubscription: Subscription;
+  private unsubscribeOnDestroy = new Subject();
 
   constructor(private coursesService: CoursesService) {
   }
@@ -30,9 +31,19 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.pagedCoursesSubscription = this.coursesService.selectPagedCourses()
-      .subscribe(({ courses, pagination }) => {
-        this.courses = courses;
+    this.fetchCourses();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeOnDestroy.next();
+    this.unsubscribeOnDestroy.complete();
+  }
+
+  private fetchCourses() {
+    this.coursesService.fetchCourses(this.searchValue, this.pagination)
+      .pipe(takeUntil(this.unsubscribeOnDestroy))
+      .subscribe(({ results, pagination }) => {
+        this.courses = results;
         this.pagination = pagination;
 
         if (pagination.page >= pagination.numberOfPages) {
@@ -40,15 +51,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
           this.fetchCourses();
         }
       });
-    this.fetchCourses();
-  }
-
-  ngOnDestroy(): void {
-    this.pagedCoursesSubscription.unsubscribe();
-  }
-
-  private fetchCourses() {
-    this.coursesService.fetchCourses(this.searchValue, this.pagination);
   }
 
   searchCourses(searchValue: string) {
@@ -58,11 +60,13 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   deleteCourse(id: string) {
     this.coursesService.deleteCourse(id)
+      .pipe(takeUntil(this.unsubscribeOnDestroy))
       .subscribe(() => this.fetchCourses());
   }
 
   addRandomCourse() {
     this.coursesService.addRandomCourse()
+      .pipe(takeUntil(this.unsubscribeOnDestroy))
       .subscribe(() => this.fetchCourses());
   }
 

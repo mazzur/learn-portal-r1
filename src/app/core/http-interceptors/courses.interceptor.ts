@@ -9,6 +9,10 @@ import { Observable, of } from 'rxjs';
 import { Course } from 'App/courses/course';
 import { MOCK_COURSES } from 'App/core/http-interceptors/mock-courses-injection-token';
 
+/**
+ * A throw-away mock to temporarily replace server
+ */
+
 @Injectable()
 export class CoursesInterceptor implements HttpInterceptor {
 
@@ -78,7 +82,7 @@ export class CoursesInterceptor implements HttpInterceptor {
         .slice(page * pageSize, page * pageSize + pageSize),
       pagination: {
         totalNumberOfResults: matchingResults.length,
-        numberOfPages: isPageSizeAll ? 1 : Math.ceil(matchingResults.length / pageSize),
+        numberOfPages: isPageSizeAll ? 1 : (Math.ceil(matchingResults.length / pageSize) || 1),
         pageSize,
         page
       },

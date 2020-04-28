@@ -3,6 +3,7 @@ import { Course } from './course';
 import { Subject } from 'rxjs';
 import { PageSize } from 'App/shared/page-size-switcher/page-size-switcher.component';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 export interface Pagination {
   numberOfPages: number;
@@ -15,27 +16,16 @@ export interface Pagination {
   providedIn: 'root'
 })
 export class CoursesService {
-  private pagedCourses$ = new Subject<{ courses: Array<Course>, pagination: Pagination }>();
-
   constructor(private httpClient: HttpClient) {
   }
 
-  selectPagedCourses() {
-    return this.pagedCourses$;
-  }
-
   fetchCourses(query: string, pagination: Pagination) {
-    this.httpClient.get('courses', {
+    return this.httpClient.get<{ results: Array<Course>, pagination: Pagination }>('courses', {
       params: {
         query,
         page: JSON.stringify(pagination.page),
         pageSize: JSON.stringify(pagination.pageSize)
       }
-    }).subscribe((response: { results: Array<Course>, pagination: Pagination }) => {
-      this.pagedCourses$.next({
-        courses: response.results,
-        pagination: response.pagination
-      });
     });
   }
 
