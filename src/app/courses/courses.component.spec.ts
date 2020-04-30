@@ -5,10 +5,7 @@ import { CoursesService } from 'App/courses/courses.service';
 import { of } from 'rxjs';
 
 class MockCoursesService {
-  selectPagedCourses() {
-    return of({ courses: [], pagination: {} });
-  }
-  fetchCourses() {}
+  fetchCourses() { return of({ results: [], pagination: {} }); }
 }
 
 describe('CoursesComponent', () => {
