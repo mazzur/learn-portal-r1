@@ -1,42 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Course } from './course';
-import { of } from 'rxjs';
-import coursesListMock from './mocks/courses-list.mock.json';
+import { Subject } from 'rxjs';
+import { PageSize } from 'App/shared/page-size-switcher/page-size-switcher.component';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+export interface Pagination {
+  numberOfPages: number;
+  totalNumberOfResults: number;
+  page: number;
+  pageSize: PageSize;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private courses: Array<Course> = coursesListMock;
-
-  private filterCourses(normalizedQuery: string) {
-    return this.courses.filter(({ title, description }) => title.toLowerCase().includes(normalizedQuery)
-      || description.toLowerCase().includes(normalizedQuery));
+  constructor(private httpClient: HttpClient) {
   }
 
-  getCourses(query: string = '') {
-    const normalizedQuery = query.trim().toLowerCase();
-
-    return of(
-      normalizedQuery
-        ? this.filterCourses(normalizedQuery)
-        : this.courses
-    );
+  fetchCourses(query: string, pagination: Pagination) {
+    return this.httpClient.get<{ results: Array<Course>, pagination: Pagination }>('courses', {
+      params: {
+        query,
+        page: JSON.stringify(pagination.page),
+        pageSize: JSON.stringify(pagination.pageSize)
+      }
+    });
   }
 
   deleteCourse(courseId: string) {
-    this.courses.splice(this.courses.findIndex(({ id }) => id === courseId), 1);
+    return this.httpClient.delete(`courses/${ courseId }`);
   }
 
   addRandomCourse() {
-    const dummyRandomId = Math.floor(Math.random() * 100000);
-
-    this.courses.push({
-      id: `${ dummyRandomId }`,
-      title: `Random course ${ dummyRandomId }`,
-      description: 'Quite a random course description',
-      creationDate: 'Sat, 1 May 2020 14:39:21 GMT',
-      duration: 120,
-    });
+    return this.httpClient.post('courses', {});
   }
 }

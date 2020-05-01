@@ -19,7 +19,7 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "lp",
       "camelCase"
     ],
     "component-selector": [
