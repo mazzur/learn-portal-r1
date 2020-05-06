@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CourseDetailsComponent } from './course-details.component';
+import { EditCoursePageComponent } from './edit-course-page.component';
 import { ActivatedRoute } from '@angular/router';
-import { ActivatedRouteStub } from '../../testing/ActivatedRouteStub';
+import { ActivatedRouteStub } from 'App/testing/ActivatedRouteStub';
 
-describe('CourseDetailsComponent', () => {
-  let component: CourseDetailsComponent;
-  let fixture: ComponentFixture<CourseDetailsComponent>;
+describe('EditCoursePageComponent', () => {
+  let component: EditCoursePageComponent;
+  let fixture: ComponentFixture<EditCoursePageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseDetailsComponent ],
+      declarations: [ EditCoursePageComponent ],
       providers: [
         {
           provide: ActivatedRoute,
@@ -22,7 +22,7 @@ describe('CourseDetailsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseDetailsComponent);
+    fixture = TestBed.createComponent(EditCoursePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

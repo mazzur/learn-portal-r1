@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCardComponent } from './course-card.component';
-import coursesListMock from 'App/core/http-interceptors/mocks/courses-list.mock.json';
 import { DurationPipe } from 'App/shared/duration.pipe';
+import testCourse from 'App/courses/__testing__/test-course.json';
 
 describe('CoursesListItemComponent', () => {
   let component: CourseCardComponent;
@@ -18,7 +18,7 @@ describe('CoursesListItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseCardComponent);
     component = fixture.componentInstance;
-    component.course = coursesListMock[0];
+    component.course = testCourse;
     fixture.detectChanges();
   });
 

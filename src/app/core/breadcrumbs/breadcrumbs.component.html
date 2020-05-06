@@ -1,0 +1,9 @@
+<div *ngIf="breadcrumbs.length" class="breadcrumbs-wrapper">
+  <div class="container">
+    <div class="d-flex py-2">
+    <span *ngFor="let item of breadcrumbs" class="text-muted">
+      /<a [routerLink]="item.url" class="text-muted">{{item.label}}</a>
+    </span>
+    </div>
+  </div>
+</div>

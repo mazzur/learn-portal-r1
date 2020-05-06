@@ -4,5 +4,5 @@
     [ngClass]="{'btn': true, 'btn-outline-secondary': pageNumber !== page, 'btn-secondary': pageNumber === page}"
     *ngFor="let pageNumber of pages"
     (click)="changePage(pageNumber)"
-  >{{pageNumber + 1}}</button>
+  >{{pageNumber}}</button>
 </div>
