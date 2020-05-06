@@ -10,6 +10,8 @@ export class CourseCardComponent {
   @Input() course: Course;
   @Output() delete = new EventEmitter<string>();
 
+  public pendingDeletionConfirmation = false;
+
   get bgClass() {
     return this.course.topRated ? 'bg-top-rated' : 'bg-white';
   }

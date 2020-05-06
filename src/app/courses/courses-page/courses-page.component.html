@@ -1,11 +1,17 @@
 <div class="container pt-3">
-  <div class="py-3 d-flex justify-content-between">
+  <div class="py-3 d-flex justify-content-between align-items-center">
     <div class="col-6 px-0">
       <lp-courses-search-control (search)="searchCourses($event)"></lp-courses-search-control>
     </div>
-    <button class="btn btn-primary" (click)="addRandomCourse()">Add random course</button>
+    <div>
+      <button class="btn btn-secondary" (click)="addRandomCourse()">Add random course</button>
+      <button class="btn btn-primary ml-2" routerLink="/courses/new">Create new course</button>
+    </div>
   </div>
-  <div class="d-flex justify-content-end py-3">
+  <div *ngIf="courses.length" class="d-flex justify-content-between align-items-center py-3">
+    <div>
+      {{viewingCount}}
+    </div>
     <lp-page-size-switcher [pageSize]="pagination.pageSize" (pageSizeChange)="changePageSize($event)">
     </lp-page-size-switcher>
   </div>
@@ -15,12 +21,19 @@
     (delete)="deleteCourse($event)"
   >
   </lp-course-card>
+  <button
+    *ngIf="isLoadMoreBtnVisible"
+    class="btn btn-primary btn-lg btn-block"
+    (click)="changePage(pagination.page + 1)"
+  >
+    Load more
+  </button>
   <div *ngIf="!courses.length" class="text-center">
     {{ noCoursesMessage }}
   </div>
   <div
     class="d-flex justify-content-center my-3"
-    *ngIf="pagination.numberOfPages > 1"
+    *ngIf="isPageSwitcherVisible"
   >
     <lp-page-switcher
       [page]="pagination.page"

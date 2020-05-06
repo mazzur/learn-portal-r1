@@ -1,8 +1,9 @@
 import { convertToParamMap, ParamMap, Params } from '@angular/router';
-import { ReplaySubject } from 'rxjs';
+import { of, ReplaySubject, Subject } from 'rxjs';
 
 export class ActivatedRouteStub {
   private subject = new ReplaySubject<ParamMap>();
+  data = of({});
 
   constructor(initialParams: Params = {}) {
     this.setParamMap(initialParams);

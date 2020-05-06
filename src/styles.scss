@@ -8,7 +8,8 @@
 @import "node_modules/bootstrap/scss/buttons";
 @import "node_modules/bootstrap/scss/utilities";
 @import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/modal";
 
 body {
-  background-color: $body-bg;
+  background-color: $gray-100;
 }

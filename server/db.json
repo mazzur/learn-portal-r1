@@ -1,0 +1,200 @@
+{
+  "courses": [
+    {
+      "id": "123457",
+      "title": "Doing dishes in outer space",
+      "creationDate": "Sat, 18 Apr 2020 14:39:21 GMT",
+      "duration": 121,
+      "description": "It might be quite troublesome to clean your plate when there's basically nothing to breath. This course will help you to become a confident cleaner and prepare you for the next space odyssey.",
+      "topRated": false
+    },
+    {
+      "id": "123458",
+      "title": "Coding in outer space",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "description": "Ever wondered how to code when you're in 0 gravity? Sure you didn't but we have this course for you anyway.",
+      "topRated": false
+    },
+    {
+      "id": "127",
+      "title": "Random course 6",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 150,
+      "description": "Random description",
+      "topRated": false
+    },
+    {
+      "id": "128",
+      "title": "Random course 7",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 150,
+      "description": "Random description",
+      "topRated": false
+    },
+    {
+      "id": "129",
+      "title": "Random course 8",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 150,
+      "description": "Random description",
+      "topRated": false
+    },
+    {
+      "id": "130",
+      "title": "Random course 9",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 150,
+      "description": "Random description",
+      "topRated": false
+    },
+    {
+      "id": "131",
+      "title": "Random course 10",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 150,
+      "description": "Random description",
+      "topRated": false
+    },
+    {
+      "title": "Random course 22713",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "2uitHxA"
+    },
+    {
+      "title": "Random course 62886",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "k0kD3ck"
+    },
+    {
+      "title": "Random course 37387",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "kbCColv"
+    },
+    {
+      "title": "Random course 55931",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "pjIRzAB"
+    },
+    {
+      "title": "Random course 44164",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "4B3vPpU"
+    },
+    {
+      "title": "Random course 39019",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "kDzCHWP"
+    },
+    {
+      "title": "Random course 5965",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "f1HfmmV"
+    },
+    {
+      "title": "Some title",
+      "description": "Some description",
+      "duration": 134,
+      "id": "LWNjL4b"
+    },
+    {
+      "title": "asdfs",
+      "description": "asdf",
+      "duration": 22,
+      "creationDate": "Sun, 03 May 2020 11:05:55 GMT",
+      "id": "JSREs1k"
+    },
+    {
+      "title": "asdfasd",
+      "description": "asdfas",
+      "duration": 22,
+      "creationDate": "Sun, 03 May 2020 11:06:59 GMT",
+      "id": "i4yzsm_"
+    },
+    {
+      "title": "Random course 19381",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "fOmHSxn"
+    },
+    {
+      "title": "Random course 7404",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "LtD73ni"
+    },
+    {
+      "title": "Random course 66622",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "ZTOQnr-"
+    },
+    {
+      "title": "Random course 87575",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "0VWwXzN"
+    },
+    {
+      "title": "Random course 2797",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "_qmnh24"
+    },
+    {
+      "title": "Random course 16521",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "R9Tf3I1"
+    },
+    {
+      "title": "Random course 78117",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "3nClatZ"
+    },
+    {
+      "title": "Random course 88639",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "L6zOrev"
+    }
+  ]
+}

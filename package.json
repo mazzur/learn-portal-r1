@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "ci:test": "npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI",
     "ci:e2e": "npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js",
-    "ci": "npm run ci:test & npm run ci:e2e & npm run lint"
+    "ci": "npm run ci:test & npm run ci:e2e & npm run lint",
+    "server": "node server"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,8 @@
     "@angular/platform-browser-dynamic": "~9.1.1",
     "@angular/router": "~9.1.1",
     "bootstrap": "^4.4.1",
+    "json-server": "^0.16.1",
+    "jsonwebtoken": "^8.5.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
