@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Credentials {
   email: string;
@@ -14,6 +15,8 @@ export interface Credentials {
   providedIn: 'root'
 })
 export class AuthorizationService {
+  authorization$ = new BehaviorSubject<boolean>(false);
+
   constructor(private router: Router, private httpClient: HttpClient) {
   }
 
@@ -22,12 +25,14 @@ export class AuthorizationService {
       .pipe(
         tap(({ access_token }) => {
           localStorage.setItem(storageKeys.token, access_token);
+          this.authorization$.next(true);
         })
       );
   }
 
   logout() {
     localStorage.removeItem(storageKeys.token);
+    this.authorization$.next(false);
     this.router.navigate(['/login']);
   }
 

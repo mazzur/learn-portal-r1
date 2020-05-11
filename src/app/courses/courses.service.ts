@@ -3,31 +3,42 @@ import { Course } from './course';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
+  coursesData$ = new BehaviorSubject<{
+    courses: Array<Course>,
+    totalNumberOfResults: number,
+    numberOfPages: number
+  }>({
+    courses: [],
+    totalNumberOfResults: 0,
+    numberOfPages: 0
+  });
+
   constructor(private httpClient: HttpClient) {
   }
 
   fetchCourses(query: string, page: number, limit: number) {
-    return this.httpClient.get<Array<Course>>(
+    this.httpClient.get<Array<Course>>(
       `${ environment.apiUrl }/courses`, {
         params: new HttpParams()
           .set('_page', JSON.stringify(page))
           .set('_limit', JSON.stringify(limit))
           .set('q', query),
         observe: 'response'
-      }).pipe(map((response) => {
-        const totalNumberOfResults = Number(response.headers.get('X-Total-Count'));
+      }).subscribe((response) => {
+      const totalNumberOfResults = Number(response.headers.get('X-Total-Count'));
 
-        return {
-          courses: response.body as Array<Course>,
-          totalNumberOfResults,
-          numberOfPages: Math.ceil(totalNumberOfResults / limit),
-        };
-    }));
+      this.coursesData$.next({
+        courses: response.body as Array<Course>,
+        totalNumberOfResults,
+        numberOfPages: Math.ceil(totalNumberOfResults / limit),
+      });
+    });
   }
 
   fetchCourseById(id: string) {
@@ -58,6 +69,6 @@ export class CoursesService {
   }
 
   updateCourse(course: Course) {
-    return this.httpClient.put<Course>(`${ environment.apiUrl }/courses/${course.id}`, course);
+    return this.httpClient.put<Course>(`${ environment.apiUrl }/courses/${ course.id }`, course);
   }
 }
