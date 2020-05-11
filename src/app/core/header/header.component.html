@@ -10,9 +10,9 @@
       <div *ngIf="user" class="d-flex">
         <div class="d-flex align-items-center">
           <i class="fas fa-user"></i>
-          <span class="ml-1">{{user.name}}</span>
+          <span class="ml-1 e2e-user-name">{{user.name}}</span>
         </div>
-        <button type="button" class="btn btn-link text-white" (click)="logout()">
+        <button type="button" class="btn btn-link text-white e2e-logout-btn" (click)="logout()">
           Sign out
         </button>
       </div>

@@ -14,5 +14,85 @@
     "duration": 120,
     "description": "Ever wondered how to code when you're in 0 gravity? Sure you didn't but we have this course for you anyway.",
     "topRated": false
+  },
+  {
+    "id": "127",
+    "title": "Random course 6",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 150,
+    "description": "Random description",
+    "topRated": false
+  },
+  {
+    "id": "128",
+    "title": "Random course 7",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 150,
+    "description": "Random description",
+    "topRated": false
+  },
+  {
+    "id": "129",
+    "title": "Random course 8",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 150,
+    "description": "Random description",
+    "topRated": false
+  },
+  {
+    "id": "130",
+    "title": "Random course 9",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 150,
+    "description": "Random description",
+    "topRated": false
+  },
+  {
+    "id": "131",
+    "title": "Random course 10",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 150,
+    "description": "Random description",
+    "topRated": false
+  },
+  {
+    "title": "Random course 22713",
+    "description": "Quite a random course description",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 120,
+    "topRated": false,
+    "id": "2uitHxA"
+  },
+  {
+    "title": "Random course 62886",
+    "description": "Quite a random course description",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 120,
+    "topRated": false,
+    "id": "k0kD3ck"
+  },
+  {
+    "title": "Random course 37387",
+    "description": "Quite a random course description",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 120,
+    "topRated": false,
+    "id": "kbCColv"
+  },
+  {
+    "title": "Random course 55931",
+    "description": "Quite a random course description",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 120,
+    "topRated": false,
+    "id": "pjIRzAB"
+  },
+  {
+    "title": "Random course 44164",
+    "description": "Quite a random course description",
+    "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+    "duration": 120,
+    "topRated": false,
+    "id": "4B3vPpU"
   }
 ]

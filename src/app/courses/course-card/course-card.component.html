@@ -1,9 +1,9 @@
 <div lpCourseCardHighlight [creationDate]="course.creationDate"
-     [ngClass]="['card p-3 mb-3 rounded', bgClass]">
+     [ngClass]="['card p-3 mb-3 rounded e2e-course-card', bgClass]">
   <div class="card-body row">
     <div class="col-11">
       <h4 class="card-title">
-        <a routerLink="/courses/{{course.id}}">{{ course.title | uppercase }}</a>
+        <a routerLink="/courses/{{course.id}}" class="e2e-course-card-title">{{ course.title | uppercase }}</a>
         <i *ngIf="course.topRated" class="fa fa-star pl-2 star-icon"></i>
       </h4>
       <h6 class="card-subtitle text-muted">
