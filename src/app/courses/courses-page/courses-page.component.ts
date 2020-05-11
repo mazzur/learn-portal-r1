@@ -54,6 +54,15 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.coursesService.coursesData$
+      .pipe(takeUntil(this.unsubscribeOnDestroy))
+      .subscribe(({ courses, numberOfPages, totalNumberOfResults }) => {
+        this.courses = (this.isInfiniteScroll && this.pagination.page !== 1)
+          ? [...this.courses, ...courses]
+          : courses;
+        this.pagination.totalNumberOfResults = totalNumberOfResults;
+        this.pagination.numberOfPages = numberOfPages;
+      });
     this.fetchCoursesPage();
   }
 
@@ -64,25 +73,12 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
 
   private fetchCoursesPage() {
     const limit = this.pagination.pageSize === 'all' ? 6 : this.pagination.pageSize;
-    this.coursesService.fetchCourses(this.searchValue, this.pagination.page, limit)
-      .pipe(takeUntil(this.unsubscribeOnDestroy))
-      .subscribe(({ courses, numberOfPages, totalNumberOfResults }) => {
-        this.courses = (this.isInfiniteScroll && this.pagination.page !== 1)
-          ? [...this.courses, ...courses]
-          : courses;
-        this.pagination.numberOfPages = numberOfPages;
-        this.pagination.totalNumberOfResults = totalNumberOfResults;
-      });
+    this.coursesService.fetchCourses(this.searchValue, this.pagination.page, limit);
   }
 
   private refreshInfiniteCoursesList() {
     const limit = this.courses.length;
-    this.coursesService.fetchCourses(this.searchValue, 0, limit)
-      .pipe(takeUntil(this.unsubscribeOnDestroy))
-      .subscribe(({ courses, totalNumberOfResults }) => {
-        this.courses = courses;
-        this.pagination.totalNumberOfResults = totalNumberOfResults;
-      });
+    this.coursesService.fetchCourses(this.searchValue, 0, limit);
   }
 
   searchCourses(searchValue: string) {

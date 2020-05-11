@@ -3,8 +3,7 @@ import { AuthorizationService } from 'App/core/authorization.service';
 import { User } from 'App/core/user';
 import { UserService } from 'App/core/user.service';
 import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
-import { NavigationEnd, Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'lp-header',
@@ -15,20 +14,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: User | null;
   private unsubscribeOnDestroy = new Subject();
 
-  constructor(private authorizationService: AuthorizationService, private userService: UserService, private router: Router) {
+  constructor(private authorizationService: AuthorizationService, private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.router.events
+    this.userService.user$
       .pipe(
         takeUntil(this.unsubscribeOnDestroy),
-        filter(event => event instanceof NavigationEnd)
       )
-      .subscribe(() => this.getUser());
-  }
-
-  getUser() {
-    this.userService.getUser()
       .subscribe((user) => {
         this.user = user;
       });

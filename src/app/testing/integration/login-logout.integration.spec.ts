@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { LoginPageComponent } from 'App/login/login-page/login-page.component';
 import { By } from '@angular/platform-browser';
@@ -10,7 +10,6 @@ import { environment } from '../../../environments/environment';
 import { storageKeys } from 'App/core/storage-keys';
 import SpyObj = jasmine.SpyObj;
 import { HeaderComponent } from 'App/core/header/header.component';
-import { Subject } from 'rxjs';
 
 describe('Login and logout flow integration', () => {
   let loginPageComponent: LoginPageComponent;
@@ -25,7 +24,6 @@ describe('Login and logout flow integration', () => {
 
   beforeEach(async(() => {
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
-    mockRouter.events = new Subject();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, ReactiveFormsModule],
       declarations: [LoginPageComponent, HeaderComponent],
@@ -84,7 +82,6 @@ describe('Login and logout flow integration', () => {
 
     describe('app header should', () => {
       beforeEach(() => {
-        mockRouter.events.next(new NavigationEnd(1, '', ''));
         headerComponentComponentFixture.detectChanges();
       });
 
@@ -97,7 +94,6 @@ describe('Login and logout flow integration', () => {
         beforeEach(() => {
           headerComponentComponentFixture.debugElement.query(By.css('.e2e-logout-btn'))
             .triggerEventHandler('click', null);
-          mockRouter.events.next(new NavigationEnd(2, '', ''));
           headerComponentComponentFixture.detectChanges();
         });
 
