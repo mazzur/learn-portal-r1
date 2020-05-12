@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditCourseFormComponent } from './edit-course-form.component';
-import { CoursesService } from 'App/courses/courses.service';
+import { CoursesService } from 'App/courses/store/courses.service';
 import { mockService } from 'App/testing/helpers';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';

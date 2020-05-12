@@ -5,7 +5,6 @@ import { PageSizeSwitcherComponent } from './page-size-switcher/page-size-switch
 import { PageSwitcherComponent } from './page-switcher/page-switcher.component';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -14,12 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule,
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule,
     DurationPipe,
     PageSizeSwitcherComponent,
     PageSwitcherComponent,

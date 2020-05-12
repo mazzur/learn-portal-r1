@@ -1,8 +1,8 @@
 <div class="btn-group e2e-page-size-switcher" role="group">
   <button
     type="button"
-    [ngClass]="{'btn': true, 'btn-outline-secondary': pageSize !== size.value, 'btn-secondary': pageSize === size.value}"
-    *ngFor="let size of pageSizes"
-    (click)="pageSizeChange.emit(size.value)"
-  >{{size.viewValue}}</button>
+    [ngClass]="{'btn': true, 'btn-outline-secondary': activeOption !== sizeOption.value, 'btn-secondary': activeOption === sizeOption.value}"
+    *ngFor="let sizeOption of pageSizeOptions"
+    (click)="activeOptionChange.emit(sizeOption.value)"
+  >{{sizeOption.viewValue}}</button>
 </div>

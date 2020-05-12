@@ -12,7 +12,7 @@
     <div>
       {{viewingCount}}
     </div>
-    <lp-page-size-switcher [pageSize]="pagination.pageSize" (pageSizeChange)="changePageSize($event)">
+    <lp-page-size-switcher [activeOption]="activePageSizeOption" (activeOptionChange)="changePageSize($event)">
     </lp-page-size-switcher>
   </div>
   <lp-course-card

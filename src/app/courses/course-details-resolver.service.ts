@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { CoursesService } from 'App/courses/courses.service';
+import { CoursesService } from 'App/courses/store/courses.service';
 import { switchMap } from 'rxjs/operators';
 import { Course } from 'App/courses/course';
 import { EMPTY, of } from 'rxjs';

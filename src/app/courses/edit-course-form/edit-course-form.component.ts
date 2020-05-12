@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Course } from 'App/courses/course';
-import { CoursesService } from 'App/courses/courses.service';
+import { CoursesService } from 'App/courses/store/courses.service';
 import { Router } from '@angular/router';
 
 @Component({
