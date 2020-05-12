@@ -1,15 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CoursesService } from 'App/courses/courses.service';
 import { Course } from 'App/courses/course';
 import { Subject } from 'rxjs';
-import { PageSize } from 'App/shared/page-size-switcher/page-size-switcher.component';
+import { PageSize, PageSizeOption } from 'App/shared/page-size-switcher/page-size-switcher.component';
 import { takeUntil } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import { selectCoursesData } from 'App/courses/store/courses.selectors';
+import { deleteCourse, updatePagination, searchCourses, addRandomCourse } from 'App/courses/store/courses.actions';
 
-interface Pagination {
+export interface Pagination {
   numberOfPages: number;
   totalNumberOfResults: number;
   page: number;
   pageSize: PageSize;
+  infiniteLoad: boolean;
 }
 
 @Component({
@@ -20,15 +23,17 @@ interface Pagination {
 export class CoursesPageComponent implements OnInit, OnDestroy {
   courses: Array<Course> = [];
   searchValue = '';
+  activePageSizeOption: PageSizeOption = 3;
   pagination: Pagination = {
     numberOfPages: 0,
     totalNumberOfResults: 0,
     page: 1,
-    pageSize: 3
+    pageSize: 3,
+    infiniteLoad: false,
   };
   private unsubscribeOnDestroy = new Subject();
 
-  constructor(private coursesService: CoursesService) {
+  constructor(private store: Store) {
   }
 
   get noCoursesMessage() {
@@ -38,15 +43,11 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
   }
 
   get isLoadMoreBtnVisible() {
-    return this.isInfiniteScroll && this.pagination.page !== this.pagination.numberOfPages;
+    return this.pagination.infiniteLoad && this.pagination.page !== this.pagination.numberOfPages;
   }
 
   get isPageSwitcherVisible() {
-    return this.pagination.numberOfPages > 1 && !this.isInfiniteScroll;
-  }
-
-  get isInfiniteScroll() {
-    return this.pagination.pageSize === 'all';
+    return this.pagination.numberOfPages > 1 && !this.pagination.infiniteLoad;
   }
 
   get viewingCount() {
@@ -54,16 +55,17 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.coursesService.coursesData$
+    this.store.pipe(select(selectCoursesData))
       .pipe(takeUntil(this.unsubscribeOnDestroy))
-      .subscribe(({ courses, numberOfPages, totalNumberOfResults }) => {
-        this.courses = (this.isInfiniteScroll && this.pagination.page !== 1)
-          ? [...this.courses, ...courses]
-          : courses;
-        this.pagination.totalNumberOfResults = totalNumberOfResults;
-        this.pagination.numberOfPages = numberOfPages;
+      .subscribe(({ courses, pagination, searchValue }) => {
+        this.courses = courses;
+        this.searchValue = searchValue;
+        this.pagination = {
+          ...this.pagination,
+          ...pagination
+        };
       });
-    this.fetchCoursesPage();
+    this.store.dispatch(updatePagination({ pagination: this.pagination }));
   }
 
   ngOnDestroy(): void {
@@ -71,44 +73,36 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
     this.unsubscribeOnDestroy.complete();
   }
 
-  private fetchCoursesPage() {
-    const limit = this.pagination.pageSize === 'all' ? 6 : this.pagination.pageSize;
-    this.coursesService.fetchCourses(this.searchValue, this.pagination.page, limit);
-  }
-
-  private refreshInfiniteCoursesList() {
-    const limit = this.courses.length;
-    this.coursesService.fetchCourses(this.searchValue, 0, limit);
-  }
-
   searchCourses(searchValue: string) {
-    this.searchValue = searchValue;
-    this.fetchCoursesPage();
+    this.store.dispatch(searchCourses({ query: searchValue }));
   }
 
   deleteCourse(id: string) {
-    this.coursesService.deleteCourse(id)
-      .pipe(takeUntil(this.unsubscribeOnDestroy))
-      .subscribe(() => this.isInfiniteScroll ? this.refreshInfiniteCoursesList() : this.fetchCoursesPage());
+    this.store.dispatch(deleteCourse({ id }));
   }
 
   addRandomCourse() {
-    this.coursesService.addRandomCourse()
-      .pipe(takeUntil(this.unsubscribeOnDestroy))
-      .subscribe(() => this.isInfiniteScroll ? this.refreshInfiniteCoursesList() : this.fetchCoursesPage());
+    this.store.dispatch(addRandomCourse());
   }
 
-  changePageSize(pageSize: PageSize) {
-    this.pagination = {
-      ...this.pagination,
-      pageSize,
-      page: 1
-    };
-    this.fetchCoursesPage();
+  changePageSize(pageSizeOption: PageSizeOption) {
+    this.activePageSizeOption = pageSizeOption;
+    this.store.dispatch(updatePagination({
+      pagination: {
+        ...this.pagination,
+        pageSize: pageSizeOption === 'all' ? 6 : pageSizeOption,
+        infiniteLoad: pageSizeOption === 'all',
+        page: 1
+      }
+    }));
   }
 
   changePage(page: number) {
-    this.pagination.page = page;
-    this.fetchCoursesPage();
+    this.store.dispatch(updatePagination({
+      pagination: {
+        ...this.pagination,
+        page
+      }
+    }));
   }
 }

@@ -2,8 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { UserService } from './user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CoursesService } from 'App/courses/courses.service';
-import { mockService } from 'App/testing/helpers';
 import { Router } from '@angular/router';
 
 describe('UserService', () => {

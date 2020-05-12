@@ -12,6 +12,11 @@ import { PageSwitcherComponent } from 'App/shared/page-switcher/page-switcher.co
 import { By } from '@angular/platform-browser';
 import { Course } from 'App/courses/course';
 import { PageSizeSwitcherComponent } from 'App/shared/page-size-switcher/page-size-switcher.component';
+import { StoreModule } from '@ngrx/store';
+import { coursesReducers } from 'App/courses/store/courses.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from 'App/courses/store/courses.effects';
+import { metaReducers } from 'App/reducers';
 
 describe('Courses Page', () => {
   let component: CoursesPageComponent;
@@ -20,7 +25,15 @@ describe('Courses Page', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        StoreModule.forRoot(coursesReducers, {
+          metaReducers
+        }),
+        EffectsModule.forRoot([]),
+        StoreModule.forFeature('courses', coursesReducers),
+        EffectsModule.forFeature([CoursesEffects])
+      ],
       declarations: [
         CoursesPageComponent,
         CourseCardComponent,

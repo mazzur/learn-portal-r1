@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { CoursesService } from 'App/courses/courses.service';
+import { CoursesService } from 'App/courses/store/courses.service';
 import { Course } from 'App/courses/course';
+import { Store } from '@ngrx/store';
+import { deleteCourse } from '../store/courses.actions';
 
 @Component({
   selector: 'lp-course-details',
@@ -15,7 +17,7 @@ export class CourseDetailsPageComponent implements OnInit, OnDestroy {
   pendingDeletionConfirmation = false;
   unsubscribeOnDestroy = new Subject();
 
-  constructor(private route: ActivatedRoute, private coursesService: CoursesService, private router: Router) {
+  constructor(private route: ActivatedRoute, private store: Store, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,9 +27,7 @@ export class CourseDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   deleteCourse() {
-    this.coursesService.deleteCourse(this.course.id)
-      .pipe(takeUntil(this.unsubscribeOnDestroy))
-      .subscribe(() => this.router.navigate(['/courses']));
+    this.store.dispatch(deleteCourse({ id: this.course.id }));
   }
 
   ngOnDestroy() {

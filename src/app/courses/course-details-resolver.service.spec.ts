@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CourseDetailsResolverService } from './course-details-resolver.service';
-import { CoursesService } from 'App/courses/courses.service';
+import { CoursesService } from 'App/courses/store/courses.service';
 import { mockService } from 'App/testing/helpers';
 import { Router } from '@angular/router';
 

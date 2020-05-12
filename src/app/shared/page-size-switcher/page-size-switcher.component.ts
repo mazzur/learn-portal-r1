@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-export type PageSize = 3 | 6 | 'all';
+export type PageSize = 3 | 6;
+export type PageSizeOption = PageSize | 'all';
 
 @Component({
   selector: 'lp-page-size-switcher',
@@ -8,12 +9,12 @@ export type PageSize = 3 | 6 | 'all';
   styleUrls: ['./page-size-switcher.component.scss']
 })
 export class PageSizeSwitcherComponent {
-  pageSizes = [
+  pageSizeOptions = [
     { value: 3, viewValue: '3' },
     { value: 6, viewValue: '6' },
     { value: 'all', viewValue: 'All' }
   ];
-  @Input() pageSize: PageSize;
-  @Output() pageSizeChange = new EventEmitter<PageSize>();
+  @Input() activeOption: PageSizeOption;
+  @Output() activeOptionChange = new EventEmitter<PageSize>();
 
 }
