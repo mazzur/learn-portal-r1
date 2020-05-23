@@ -7,6 +7,7 @@ import { NotFountPageComponent } from './not-fount-page/not-fount-page.component
 import { SharedModule } from 'App/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { GlobalLoadingComponent } from './global-loading/global-loading.component';
 
 
 
@@ -15,7 +16,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     HeaderComponent,
     FooterComponent,
     NotFountPageComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    GlobalLoadingComponent
   ],
   imports: [
     SharedModule,
@@ -28,7 +30,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     HeaderComponent,
     FooterComponent,
     HttpClientModule,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    GlobalLoadingComponent
   ]
 })
 export class CoreModule { }

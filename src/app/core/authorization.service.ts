@@ -15,7 +15,7 @@ export interface Credentials {
   providedIn: 'root'
 })
 export class AuthorizationService {
-  authorization$ = new BehaviorSubject<boolean>(false);
+  authorization$ = new BehaviorSubject<boolean>(!!localStorage.getItem(storageKeys.token));
 
   constructor(private router: Router, private httpClient: HttpClient) {
   }
@@ -34,10 +34,6 @@ export class AuthorizationService {
     localStorage.removeItem(storageKeys.token);
     this.authorization$.next(false);
     this.router.navigate(['/login']);
-  }
-
-  isAuthenticated() {
-    return !!this.getToken();
   }
 
   getToken() {
