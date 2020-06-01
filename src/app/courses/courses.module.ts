@@ -9,6 +9,7 @@ import { CoursesSearchControlComponent } from './courses-search-control/courses-
 import { CourseCardHighlightDirective } from './course-card/course-card-highlight.directive';
 import { EditCourseFormComponent } from './edit-course-form/edit-course-form.component';
 import { EditCoursePageComponent } from './edit-course-page/edit-course-page.component';
+import { AuthorsControlComponent } from 'App/courses/authors-control/authors-control.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EditCoursePageComponent } from './edit-course-page/edit-course-page.com
     CoursesSearchControlComponent,
     CourseCardHighlightDirective,
     EditCourseFormComponent,
-    EditCoursePageComponent
+    EditCoursePageComponent,
+    AuthorsControlComponent,
   ],
   imports: [
     SharedModule,

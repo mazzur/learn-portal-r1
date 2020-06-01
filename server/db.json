@@ -195,6 +195,41 @@
       "duration": 120,
       "topRated": false,
       "id": "L6zOrev"
+    },
+    {
+      "title": "Random course 84240",
+      "description": "Quite a random course description",
+      "creationDate": "Sat, 1 May 2020 14:39:21 GMT",
+      "duration": 120,
+      "topRated": false,
+      "id": "vaxujr9"
+    },
+    {
+      "title": "",
+      "description": "",
+      "duration": 0,
+      "creationDate": "Sat, 30 May 2020 15:00:19 GMT",
+      "id": "XNq23mY"
+    },
+    {
+      "title": "asdfds",
+      "description": "asdf",
+      "duration": "22",
+      "creationDate": "Mon, 01 Jun 2020 07:11:34 GMT",
+      "id": "1dH4J7R",
+      "date": null
+    },
+    {
+      "title": "asdf",
+      "description": "asfas",
+      "duration": "120",
+      "date": "12/09/2018",
+      "authors": [
+        "john I",
+        "john II"
+      ],
+      "creationDate": "Mon, 01 Jun 2020 13:36:01 GMT",
+      "id": "c615Or3"
     }
   ]
 }

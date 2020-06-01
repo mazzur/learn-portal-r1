@@ -1,0 +1,17 @@
+<div class="form-control d-flex authors-control" (click)="focusInput()">
+  <span
+    *ngFor="let author of selectedAuthors"
+    class="badge badge-light mr-2 d-flex align-items-center"
+  >
+    <span>{{ author }}</span>
+    <i class="fas fa-times pointer ml-2" (click)="removeAuthor(author)"></i>
+  </span>
+  <lp-search-autocomplete
+    #searchAutocomplete
+    [suggestions]="suggestions"
+    (query)="query$.next($event)"
+    (choose)="selectAuthor($event)"
+    (inputBlur)="onTouched()"
+  >
+  </lp-search-autocomplete>
+</div>

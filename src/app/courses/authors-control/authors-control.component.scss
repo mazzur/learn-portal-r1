@@ -1,0 +1,12 @@
+@import "src/globals";
+@import "node_modules/bootstrap/scss/forms";
+
+:host.ng-touched.ng-invalid {
+  .authors-control {
+    @extend .is-invalid;
+  }
+}
+
+.authors-control {
+  cursor: text;
+}

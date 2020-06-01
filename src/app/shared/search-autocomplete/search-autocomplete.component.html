@@ -1,0 +1,24 @@
+<div>
+  <input
+    type="text"
+    class="search-autocomplete-input"
+    #searchControl
+    [(ngModel)]="inputValue"
+    (input)="query.next(searchControl.value)"
+    (blur)="inputBlur.next()"
+  >
+  <div
+    *ngIf="inputValue && suggestions.length"
+    class="dropdown show"
+  >
+    <div class="dropdown-menu show">
+      <div
+        *ngFor="let value of suggestions"
+        class="dropdown-item pointer"
+        (click)="chooseSuggestion(value)"
+      >
+        {{value}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -53,6 +53,20 @@ server.get('/user/profile', (req, res) => {
   }
 });
 
+server.get('/users', (req, res) => {
+  try {
+    res.status(200).json(userdb.users
+      .map(({ name }) => name)
+      .filter(name => name.toLowerCase().includes(req.query.q.toLowerCase()))
+    );
+  } catch (err) {
+    res.status(401).json({
+      code: 401,
+      message: 'Authorization token is not valid'
+    });
+  }
+});
+
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
   if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
     return res.status(401).json({

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course } from 'App/courses/course';
 import { CoursesService } from 'App/courses/courses.service';
 import { Router } from '@angular/router';
@@ -21,21 +21,25 @@ export class EditCourseFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.courseForm = this.formBuilder.group(this.course
-      ? {
-        title: this.course.title,
-        description: this.course.description,
-        duration: this.course.duration,
-      } : {
-        title: '',
-        description: '',
-        duration: 0,
-      });
+    const initialValues = this.course || {
+      title: '',
+      description: '',
+      duration: 0,
+      date: '',
+      authors: [],
+    };
+
+    this.courseForm = this.formBuilder.group({
+      title: [initialValues.title, [Validators.required, Validators.maxLength(50)]],
+      description: [initialValues.description, [Validators.required, Validators.maxLength(500)]],
+      duration: [initialValues.duration, [Validators.required]],
+      date: [initialValues.date, [Validators.required]],
+      authors: [initialValues.authors, [Validators.required]]
+    });
   }
 
   submitForm(editData: { title: string, description: string, duration: number }) {
-    (
-      this.course
+    (this.course
         ? this.coursesService.updateCourse({ ...this.course, ...editData })
         : this.coursesService.createCourse(editData)
     ).subscribe(({ id }) => {

@@ -1,0 +1,8 @@
+@import "src/globals";
+@import "node_modules/bootstrap/scss/forms";
+
+:host.ng-touched.ng-invalid {
+  .duration-control {
+    @extend .is-invalid;
+  }
+}

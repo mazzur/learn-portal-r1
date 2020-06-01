@@ -1,0 +1,6 @@
+@import "src/globals";
+@import "node_modules/bootstrap/scss/forms";
+
+.ng-touched.ng-invalid {
+  @extend .is-invalid;
+}

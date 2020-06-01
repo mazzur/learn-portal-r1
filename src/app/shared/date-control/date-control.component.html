@@ -1,0 +1,12 @@
+<div class="d-flex align-items-center">
+  <div>
+    <input
+      type="text"
+      class="form-control date-control"
+      [id]="id"
+      [value]="date"
+      (blur)="onBlur()"
+      (input)="onChange($event)"
+    >
+  </div>
+</div>

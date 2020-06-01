@@ -2,17 +2,81 @@
   <h3>{{formTitle}}</h3>
   <form [formGroup]="courseForm" (ngSubmit)="submitForm(courseForm.value)">
     <div class="form-group">
-      <label for="title">Title</label>
+      <label for="title">Title <span class="text-danger">*</span></label>
       <input type="text" class="form-control" id="title" formControlName="title">
+      <div
+        *ngIf="courseForm.get('title')?.hasError('required')"
+        class="invalid-feedback"
+      >
+        Please enter course title
+      </div>
+      <div
+        *ngIf="courseForm.get('title')?.hasError('maxlength')"
+        class="invalid-feedback"
+      >
+        Course title cannot be longer than 50 symbols
+      </div>
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
+      <label for="description">Description <span class="text-danger">*</span></label>
       <textarea name="description" id="description" class="form-control" rows="4" formControlName="description"></textarea>
+      <div
+        *ngIf="courseForm.get('description')?.hasError('required')"
+        class="invalid-feedback"
+      >
+        Please describe the course
+      </div>
+      <div
+        *ngIf="courseForm.get('description')?.hasError('maxlength')"
+        class="invalid-feedback"
+      >
+        Course description cannot be longer than 500 symbols
+      </div>
     </div>
     <div class="form-group">
-      <label for="duration">Duration</label>
-      <input type="number" class="form-control" id="duration" formControlName="duration">
+      <label for="duration">Duration <span class="text-danger">*</span></label>
+      <lp-duration-control id="duration" formControlName="duration">
+      </lp-duration-control>
+      <div
+        *ngIf="courseForm.get('duration')?.hasError('required')"
+        class="invalid-feedback"
+      >
+        Please enter course duration
+      </div>
+      <div
+        *ngIf="courseForm.get('duration')?.hasError('pattern')"
+        class="invalid-feedback"
+      >
+        Please enter course duration in minutes
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+      <label for="date">Date <span class="text-danger">*</span></label>
+      <lp-date-control id="date" formControlName="date">
+      </lp-date-control>
+      <div
+        *ngIf="courseForm.get('date')?.hasError('required')"
+        class="invalid-feedback"
+      >
+        Please enter course start date
+      </div>
+      <div
+        *ngIf="courseForm.get('date')?.hasError('pattern')"
+        class="invalid-feedback"
+      >
+        Please follow the dd/mm/yyyy format
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Authors <span class="text-danger">*</span></label>
+      <lp-authors-control formControlName="authors"></lp-authors-control>
+      <div
+        *ngIf="courseForm.get('authors')?.hasError('required')"
+        class="invalid-feedback"
+      >
+        Please enter the name(s) of the author(s)
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!courseForm.valid">Submit</button>
   </form>
 </div>

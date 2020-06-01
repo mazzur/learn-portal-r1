@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center">
+  <div>
+    <input
+      type="text"
+      class="form-control duration-control"
+      [id]="id"
+      [value]="duration"
+      (blur)="onBlur()"
+      (input)="onChange($event)"
+    >
+  </div>
+  <div class="ml-2">
+    {{ duration | duration }}
+  </div>
+</div>
