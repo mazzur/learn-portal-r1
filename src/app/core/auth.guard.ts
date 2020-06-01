@@ -11,6 +11,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthorizationService } from 'App/core/authorization.service';
+import { take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,15 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   private checkLogin(url: string) {
-    if (this.authorizationService.isAuthenticated()) {
-      return true;
-    }
-
-    this.router.navigate(['/login']);
-
-    return false;
+    return this.authorizationService.authorization$
+      .pipe(
+        take(1),
+        tap((isAuthorized) => {
+          if (!isAuthorized) {
+            this.router.navigate(['/login']);
+          }
+        })
+      );
   }
 
   canActivate(
@@ -36,7 +39,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.checkLogin(state.url);
   }
 
-  canLoad(route: Route, segments: Array<UrlSegment>): boolean {
+  canLoad(route: Route, segments: Array<UrlSegment>): Observable<boolean> {
     return this.checkLogin(route.path || '');
   }
 
